@@ -1,0 +1,4 @@
+/.venv
+*__pycache__
+*gui_ideen.txt
+App/test.py
