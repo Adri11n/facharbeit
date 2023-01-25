@@ -1,6 +1,6 @@
 Einleitung
-Erklärung von laufzeit komplexizizäz und big o natation
-begriff definitiono
-beispiel ahnad einer implamentation
-kritik an obrigem
+Erklärung von laufzeit komplexizizät und big o natation
+definitionen; z.b von log als log2 bzw von den landau notationen und ähnlichem
+erklärung anhand vom beispiel einer implamentation
+kritik an laufzeit komplexizizät und big o natation
 Fazit
