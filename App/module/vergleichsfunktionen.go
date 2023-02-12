@@ -4,11 +4,7 @@ import (
 	"math"
 )
 
-// O(1)
-func O(liste []int) int {
-	return liste[0]
-}
-
+// alles sortierte listen
 // O(log n)
 func Binärer_logorythmuen_von_n(liste []int) []float64 {
 	var ergebnisse []float64
@@ -27,8 +23,7 @@ func Linar(liste []int) []int {
 	return ergebnisse
 }
 
-//O(n log n)
-
+// O(n log n)
 func Linear_mal_log_von_n(liste []int) []float64 {
 	var ergebnisse []float64
 	for _, x := range liste {
