@@ -4,7 +4,7 @@ from math import log2
 
 
 def O(liste: list) -> int:
-    return 1
+    return liste[0]
 
 # O(log n)
 
