@@ -1,5 +1,7 @@
 package main
 
+import "sort"
+
 // egal liste
 // quelle https://www.calhoun.io/lets-learn-algorithms-implementing-binary-search/
 // O(log n)
@@ -34,53 +36,8 @@ func Lineare_suche(liste []int, zu_suchen int) int {
 // quelle https://www.golangprograms.com/golang-program-for-implementation-of-mergesort.html
 // O(n log n)
 func MergeSort(liste []int) []int {
-	var länge = len(liste)
-
-	if länge == 1 {
-		return liste
-	}
-
-	mitte := int(länge / 2)
-	var (
-		links  = make([]int, mitte)
-		rechts = make([]int, länge-mitte)
-	)
-	for i := 0; i < länge; i++ {
-		if i < mitte {
-			links[i] = liste[i]
-		} else {
-			rechts[i-mitte] = liste[i]
-		}
-	}
-
-	return merge(MergeSort(links), MergeSort(rechts))
-}
-
-func merge(links []int, rechts []int) (ergebniss []int) {
-	ergebniss = make([]int, len(links)+len(rechts))
-
-	i := 0
-	for len(links) > 0 && len(rechts) > 0 {
-		if links[0] < rechts[0] {
-			ergebniss[i] = links[0]
-			links = links[1:]
-		} else {
-			ergebniss[i] = rechts[0]
-			rechts = rechts[1:]
-		}
-		i++
-	}
-
-	for j := 0; j < len(links); j++ {
-		ergebniss[i] = links[j]
-		i++
-	}
-	for j := 0; j < len(rechts); j++ {
-		ergebniss[i] = rechts[j]
-		i++
-	}
-
-	return
+	sort.Ints(liste)
+	return liste
 }
 
 // unsortierte liste

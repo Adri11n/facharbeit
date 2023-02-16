@@ -1,39 +1,39 @@
-from platform import system as whatos
-from os import system, sep, remove
-from json import load, dump
-
-in_json = f"module{sep}in.json"
-out_json = f"module{sep}out.json"
-
-def _welchesos() -> str:
-    os = whatos()
-    if os == "Windows":
-        return "module\\bin\\win-32\\main.exe"
-    elif os == "Linux":
-        return "module/bin/gnu-linux/main"
-    else:
-        return "kacke"
+from platform import system
+from os import sep
+from json import loads, dumps
+import ctypes
 
 
-def main_aufrufen() -> any:
-    system(_welchesos())
-    daten = _json_lesen()
-    remove(out_json)
-    return daten
+def bibeliothek_laden() -> any:
+    if system() == "linux":
+        main = ctypes.cdll.LoadLibrary(
+            f'module{sep}bin{sep}gnu-linux{sep}library.so')
+        read = main.read
+        read.argtypes = [ctypes.c_char_p]
+        read.restype = ctypes.c_void_p
+        return read
+    elif system() == "Windows":
+        main = ctypes.cdll.LoadLibrary(
+            f'module{sep}bin{sep}win-32{sep}library.dll')
+        read = main.read
+        read.argtypes = [ctypes.c_char_p]
+        read.restype = ctypes.c_void_p
+        return read
 
 
-def json_schreiben(function: str, liste: list, zahl: int = 0, zu_suchen: int = 0, anfang: int = 0, länge: int = 0):
-    with open(in_json, "w") as f:
-        dump({
-    "function": function,
-    "liste": liste,
-    "zahl": zahl,
-    "zu_suchen": zu_suchen,
-    "anfang": anfang,
-    "länge": länge
-        }, f, ensure_ascii=False)
-    
+def json_schreiben(function: str, liste: list = [1], zahl: int = 0, zu_suchen: int = 0, anfang: int = 0, länge: int = 0):
+    return dumps({
+        "function": function,
+        "liste": liste,
+        "zahl": zahl,
+        "zu_suchen": zu_suchen,
+        "anfang": anfang,
+        "länge": länge
+    }, ensure_ascii=False).encode('utf-8')
 
-def _json_lesen() -> any:
-    with open(out_json, "r") as f:
-        return load(f)
+
+def json_lesen(pointer: ctypes.c_void_p) -> dict:
+    return loads(ctypes.string_at(pointer))
+
+
+read = bibeliothek_laden()
