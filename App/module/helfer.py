@@ -5,16 +5,16 @@ import ctypes
 
 
 def bibeliothek_laden() -> any:
-    if system() == "linux":
+    if system() == "Linux":
         main = ctypes.cdll.LoadLibrary(
-            f'module{sep}bin{sep}gnu-linux{sep}library.so')
+            f'module{sep}bin{sep}gnu-linux{sep}main.so')
         read = main.read
         read.argtypes = [ctypes.c_char_p]
         read.restype = ctypes.c_void_p
         return read
     elif system() == "Windows":
         main = ctypes.cdll.LoadLibrary(
-            f'module{sep}bin{sep}win-32{sep}library.dll')
+            f'module{sep}bin{sep}win-32{sep}main.dll')
         read = main.read
         read.argtypes = [ctypes.c_char_p]
         read.restype = ctypes.c_void_p
